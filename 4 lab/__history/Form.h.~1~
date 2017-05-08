@@ -1,0 +1,37 @@
+//---------------------------------------------------------------------------
+
+#ifndef FormH
+#define FormH
+//---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+//---------------------------------------------------------------------------
+class TPostfixExpressions : public TForm
+{
+__published:	// IDE-managed Components
+	TEdit *Infix;
+	TLabel *Label1;
+	TEdit *Edit1;
+	TLabel *Label2;
+	TEdit *a;
+	TLabel *Label3;
+	TEdit *b;
+	TLabel *Label4;
+	TEdit *c;
+	TLabel *Label5;
+	TEdit *d;
+	TLabel *Label6;
+	TEdit *e;
+	TLabel *Label7;
+	TButton *Translate;
+	TButton *Calculate;
+private:	// User declarations
+public:		// User declarations
+	__fastcall TPostfixExpressions(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TPostfixExpressions *PostfixExpressions;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#ifndef StackH
+#define StackH
+struct element
+{
+	double value;
+	element *next = NULL;
+};
+class Stack
+{
+	private:
+	element *top = NULL;
+	public:
+	Stack(double value);
+	void Push(double value);
+	double Pop();
+	~Stack();
+};
+//---------------------------------------------------------------------------
+#endif

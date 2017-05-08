@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.245,D:\2 сем\лабы\оаип\4 lab\Form.dfm=C:\Users\Геля\Documents\RAD Studio\Projects\Form.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.219,D:\2 сем\лабы\оаип\4 lab\lab4.cbproj=C:\Users\Геля\Documents\RAD Studio\Projects\lab4.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.396,D:\2 сем\лабы\оаип\4 lab\Expression.h=C:\Users\Геля\Documents\RAD Studio\Projects\Expression.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.841,C:\Users\Геля\Documents\RAD Studio\Projects\Stack.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.245,D:\2 сем\лабы\оаип\4 lab\Form.h=C:\Users\Геля\Documents\RAD Studio\Projects\Form.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.199,=C:\Users\Геля\Documents\RAD Studio\Projects\Unit3.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.396,D:\2 сем\лабы\оаип\4 lab\Expression.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Expression.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.944,D:\2 сем\лабы\оаип\4 lab\Stack.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Stack.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.743,=C:\Users\Геля\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.570,C:\Users\Геля\Documents\RAD Studio\Projects\Form.h=C:\Users\Геля\Documents\RAD Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.245,D:\2 сем\лабы\оаип\4 lab\Form.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Form.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.804,=C:\Users\Геля\Documents\RAD Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.232,C:\Users\Геля\Documents\RAD Studio\Projects\Expression.h=C:\Users\Геля\Documents\RAD Studio\Projects\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.841,C:\Users\Геля\Documents\RAD Studio\Projects\Stack.h=C:\Users\Геля\Documents\RAD Studio\Projects\Unit3.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.598,=C:\Users\Геля\Documents\RAD Studio\Projects\Project1.res</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.570,C:\Users\Геля\Documents\RAD Studio\Projects\Form.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.573,C:\Users\Геля\Documents\RAD Studio\Projects\lab4.cbproj=C:\Users\Геля\Documents\RAD Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.232,C:\Users\Геля\Documents\RAD Studio\Projects\Expression.cpp=C:\Users\Геля\Documents\RAD Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.570,C:\Users\Геля\Documents\RAD Studio\Projects\Form.dfm=C:\Users\Геля\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.945,D:\2 сем\лабы\оаип\4 lab\Stack.h=C:\Users\Геля\Documents\RAD Studio\Projects\Stack.h</Transaction>
+  </Transactions>
+</BorlandProject>

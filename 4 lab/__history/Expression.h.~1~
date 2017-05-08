@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------
+
+#ifndef ExpressionH
+#define ExpressionH
+#include <vcl.h>
+//---------------------------------------------------------------------------
+class Expression
+{
+	public:
+	//PostfixExpression(AnsiString expression);
+
+};
+#endif

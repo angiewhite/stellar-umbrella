@@ -1,0 +1,87 @@
+//---------------------------------------------------------------------------
+
+
+#pragma hdrstop
+
+#include "Expression.h"
+
+//---------------------------------------------------------------------------
+Expression::Expression(AnsiString infix)
+{
+	operators = new Stack(0);
+	expression = ParseExpression(infix);
+}
+Expression::~Expression()
+{
+	delete operators;
+}
+AnsiString Expression::GetExpression()
+{
+	return expression;
+}
+double Expression::Calculate()
+{
+	return 0;
+}
+AnsiString Expression::ParseExpression(AnsiString Infix)
+{
+	AnsiString Postfix;
+	for (int i = 1; i <= Infix.Length(); i++) {
+		if (Infix[i] <= 'z' && Infix[i] >= 'a') {
+			Postfix += Infix[i];
+		}
+		else Postfix = DoSomething(Infix[i], Postfix);
+	}
+	return Postfix;
+}
+AnsiString Expression::DoSomething(char operation, AnsiString string)
+{
+	double ch;
+	ch = operators->Pop();
+	operators->Push(ch);
+	if (operation == '~') {
+		if (ch == '~') {
+			return string;
+		}
+		if (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^') {
+			string += (char)operators->Pop();
+			string = DoSomething(operation, string);
+		}
+		operators->Push(operation);
+	}
+	if (operation == '+' || operation == '-') {
+		if (ch == '~' || ch == '(') {
+			operators->Push(operation);
+		}
+		if (ch == '+' || ch == '-' || ch == '^' || ch == '*' || ch == '/') {
+			string += (char)operators->Pop();
+			string = DoSomething(operation, string);
+		}
+	}
+	if (operation == '*' || operation == '/') {
+		if (ch == '+' || ch == '-' || ch == '~' || ch == '(') {
+			operators->Push(operation);
+		}
+		if (ch == '*' || ch == '/' || ch == '^') {
+			string += (char)operators->Pop();
+			string = DoSomething(operation, string);
+		}
+	}
+	if (operation == '(') {
+		operators->Push(operation);
+	}
+	if (operation == '^') {
+		operators->Push(operation);
+	}
+	if (operation == ')') {
+		if (ch == '+' || ch == '-' || ch == '^' || ch == '*' || ch == '/') {
+			string += (char)operators->Pop();
+			string = DoSomething(operation, string);
+		}
+		if (ch == '(') {
+			operators->Pop();
+		}
+	}
+	return string;
+}
+#pragma package(smart_init)

@@ -1,0 +1,192 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Form.h"
+#include "Expression.h"
+#include "Stack.h"
+#include <math.h>
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TPostfixExpressions *PostfixExpressions;
+Expression *expression;
+Stack *stack = new Stack(0);
+//my own implementation of atof function
+//I wrote it and only a day after I realized that it's vain
+//I recalled there is actually an all-ready function provided by multiple standard libraries
+//how stupid is that?
+//well, I just can't remove it from the file
+//it's a sign of respect towards my efforts
+double ParseNumber(AnsiString segment)
+{
+	double number = 0, sign = 1;
+	if (segment[1] == '-') {
+		sign *= -1;
+		segment.Delete(1,1);
+	}
+	int comma;
+	comma = segment.Pos(".");
+	if (comma != 0) {
+		for (int i = 1; i < comma; i++) {
+			number += (segment[i] - '0') * pow(10., comma - i - 1);
+		}
+		for (int i = comma + 1; i <= segment.Length(); i++) {
+			number += (segment[i] - '0') * pow(10., -(i - comma));
+		}
+	}
+	else
+	{
+		for (int i = 1; i <= segment.Length(); i++) {
+			number += (segment[i] - '0') * pow(10., segment.Length() - i);
+		}
+    }
+	return sign * number;
+}
+//checks if the entry was correct
+//still, it's not almighty
+//that's why I have exception handler down there
+bool IsCorrect(AnsiString expression)
+{
+	for (int i = 1; i < expression.Length(); i++) {
+		if (expression[i] <= '9' && expression[i] >= '0') {
+			continue;
+		}
+		switch(expression[i])
+		{
+			case '+':
+			case '-':
+			case '*':
+			case '^':
+			case '/':
+			case '(':
+			case ')': continue;
+			default: return false;
+        }
+	}
+	return true;
+}
+//---------------------------------------------------------------------------
+__fastcall TPostfixExpressions::TPostfixExpressions(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+//parses an infix expression and passes it to class Expression translator
+//"parses" means it replaces numbers with letters of english alphabet
+//as it modifies expression into formula with variables
+void __fastcall TPostfixExpressions::TranslateClick(TObject *Sender)
+{
+    if (Infix->Text == "") {
+		ShowMessage("You haven't made an entry.");
+		return;
+	}
+	AnsiString text = Infix->Text;
+	int operands = 0;
+	if (!IsCorrect(text)) {
+		 ShowMessage("Wrong entry.");
+		 Infix->Text = "";
+		 return;
+	}
+	//erases spaces
+	for (int i = 1; i <= text.Length(); i++) {
+		if (text[i] == ' ') {
+			text = text.Delete(i,1);
+			i--;
+		}
+	}
+	//calculates operands by counting operators
+	for (int i = 1; i <= text.Length(); i++) {
+		if (text[i] == '+' || text[i] == '-' || text[i] == '*' ||
+			text[i] == '/' || text[i] == '^') {
+			operands++;
+			if (text[i] == '-' && text[i - 1] == '(') {
+				operands -= 1;
+			}
+		}
+	}
+	operands++;
+	if (operands > 26) {
+		ShowMessage("This expression has to many operands. Split it in smaller ones");
+		return;
+	}
+	Operands->RowCount = operands + 1;
+	char variable = 'a';
+	int previous = 1, row = 1;
+	AnsiString number;
+	for (int i = 0; i < operands; i++) {
+		Operands->Cells[0][i + 1] = variable;
+		variable++;
+	}
+	for (int i = 1; i <= text.Length(); i++) {
+		if (text[i] == '-' && text[i - 1] == '(') {
+			continue;
+		}
+		if (text[i] == '(') {
+			previous = i + 1;
+		}
+		if (text[i] == ')') {
+			Operands->Cells[1][row] = text.SubString(previous, i - previous);
+			previous = i + 1;
+			row++;
+			continue;
+		}
+		if (text[i] == '+' || text[i] == '-' || text[i] == '*' ||
+			text[i] == '/' || text[i] == '^') {
+			if (text[i - 1] == ')') {
+				previous = i + 1;
+			}
+			else {
+				Operands->Cells[1][row] =
+					text.SubString(previous, i - previous);
+				previous = i + 1;
+				row++;
+			}
+		}
+		if (i == text.Length()) {
+			Operands->Cells[1][row] = text.SubString(previous, i - previous + 1);
+		}
+	}
+	int position;
+	for (int i = 1; i < Operands->RowCount; i++) {
+		position = text.Pos(Operands->Cells[1][i]);
+		text.Insert(Operands->Cells[0][i], position);
+		text = text.Delete(position + 1, Operands->Cells[1][i].Length());
+	}
+	text.Insert('~', 1);
+	text += '~';
+	expression = new Expression(text);
+	Postfix->Text = expression->GetExpression();
+}
+//---------------------------------------------------------------------------
+void __fastcall TPostfixExpressions::CalculateClick(TObject *Sender)
+{
+	if (Postfix->Text == "") {
+		ShowMessage("You haven't made an entry.");
+		return;
+	}
+	try
+	{
+		Result->Caption = expression->Calculate(Operands);
+	}
+	catch(...)
+	{
+		ShowMessage("Perhaps, you entry had incorrect form.");
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TPostfixExpressions::FormCreate(TObject *Sender)
+{
+	Operands->Cells[0][0] = "Operand";
+	Operands->Cells[1][0] = "Value";
+}
+//---------------------------------------------------------------------------
+void __fastcall TPostfixExpressions::FormClose(TObject *Sender, TCloseAction &Action)
+{
+	delete expression;
+}
+//---------------------------------------------------------------------------
+
+
+

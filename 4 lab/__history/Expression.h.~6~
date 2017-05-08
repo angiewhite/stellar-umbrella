@@ -1,0 +1,25 @@
+//---------------------------------------------------------------------------
+
+#ifndef ExpressionH
+#define ExpressionH
+#include <vcl.h>
+#include "Stack.h"
+//---------------------------------------------------------------------------
+enum Operations
+{brace = '(', multiply = '*', divide = '/', plus = '+', minus = '-'};
+
+class Expression
+{
+	private:
+	Stack *operators, *operands;
+	AnsiString expression;
+	AnsiString ParseExpression(AnsiString Infix);
+	public:
+	Expression(AnsiString infix);
+	AnsiString GetExpression();
+	//double ParseNumber(AnsiString segment);
+	AnsiString DoSomething(char operation, AnsiString string);
+	double Calculate();
+	~Expression();
+};
+#endif
