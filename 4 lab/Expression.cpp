@@ -8,7 +8,6 @@
 //---------------------------------------------------------------------------
 //creates stacks of operands and operators
 //initializes expression with a postfix representation of initial one
-//переводит из постфиксной формы в инфиксную и присвает переменной expression
 Expression::Expression(AnsiString infix)
 {
 	operators = new Stack(0);
@@ -72,10 +71,10 @@ AnsiString Expression::ParseExpression(AnsiString Infix)
 //a function that I could not find a proper name to
 //it does what is written here
 //https://habrahabr.ru/post/100869/
-//на самом деле в их алгоритме есть небольшая ошибка
-//это касается возведения в степень
-//они неправильно определяют приоритет операции - я это поменяла
-//хотя это не так уж и заметно
+//for one exception
+//they mistakenly defined the priority of exponentiation
+//I changed it
+//but it's a hardly seen correction
 AnsiString Expression::DoSomething(char operation, AnsiString string)
 {
 	double ch;
